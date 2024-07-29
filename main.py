@@ -1,7 +1,7 @@
 # main script for bot
 import os
 import discord
-import model
+import controller
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -38,6 +38,7 @@ async def on_member_join(member):
 # bot response for messages
 @client.event
 async def on_message(message):
+    # ignore message sent by itself
     if message.author == client.user:
         return
 
@@ -53,7 +54,7 @@ async def on_message(message):
     else:
         print('\nAuthor: ', message.author)
         print('Message: ', message.content)
-        response = model.generate_response()
+        response = controller.generate_response()
         await message.channel.send(response)
 
 
