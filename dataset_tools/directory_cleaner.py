@@ -18,6 +18,7 @@ whitelist = ['.jpeg','.png']
 # List all files in the directory
 files = os.listdir(directory)
 
+print('Before:')
 list_files(files)
 
 for file in files:
@@ -32,4 +33,5 @@ for file in files:
             print(f'An error has occured: {e}')
 
 files = os.listdir(directory)
+print('\nAfter:')
 list_files(files)

@@ -15,7 +15,8 @@ def main():
 
     main_layout = QVBoxLayout()
 
-    pixmap = QPixmap("dataset_tool\\erm_1119580269528231969.png")
+    # get the first image to pop up
+    pixmap = QPixmap(retrieve_image())
     label = QLabel()
     label.setPixmap(pixmap)
     label.setAlignment(Qt.AlignCenter)
@@ -29,17 +30,17 @@ def main():
     cringe_btn = QPushButton("cringe")
     cringe_btn.setStyleSheet("background-color: #c74646")
     #cringe_btn.resize(150, 50)
-    cringe_btn.clicked.connect(lambda: on_clicked(cringe_btn.text()))
+    cringe_btn.clicked.connect(lambda: on_clicked(cringe_btn.text(), label))
 
     funny_btn = QPushButton("funny")
     funny_btn.setStyleSheet("background-color: #76db91")
     #funny_btn.resize(150, 50)
-    funny_btn.clicked.connect(lambda: on_clicked(funny_btn.text()))
+    funny_btn.clicked.connect(lambda: on_clicked(funny_btn.text(), label))
 
     neutral_btn = QPushButton("neutral")
     neutral_btn.setStyleSheet("background-color: #adadad")
     #neutral_btn.resize(150, 50)
-    neutral_btn.clicked.connect(lambda: on_clicked(neutral_btn.text()))
+    neutral_btn.clicked.connect(lambda: on_clicked(neutral_btn.text(), label))
 
     hlayout.addWidget(cringe_btn)
     hlayout.addWidget(neutral_btn)
@@ -54,11 +55,9 @@ def main():
     app.exec_()
 
 # function to control button clicks
-def on_clicked(msg):
-    #print('hi')
-    mbox = QMessageBox()
-    mbox.setText(msg)
-    mbox.exec_()
+def on_clicked(msg, label):
+    print('hi')
+    set_image(label)
 
 # function to center window on monitor screen
 def set_center(window):
@@ -76,6 +75,25 @@ def set_center(window):
 
     # Move the top-left point of the window to the top-left point of the moved rectangle
     window.move(window_rect.topLeft())
+
+def retrieve_image():
+    global file_counter
+    directory = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\images\\break-room_media"
+    files = os.listdir(directory)
+    #print(len(files))
+
+    file = directory + "\\" + files[file_counter]
+    file_counter = file_counter + 1
+    #print(file)
+
+    return file
+
+def set_image(label):
+    pixmap = QPixmap(retrieve_image())
+    label.setPixmap(pixmap)
+    label.resize(pixmap.width(), pixmap.height())
+
+file_counter = 0
 
 if __name__ == '__main__':
     main()
