@@ -1,7 +1,7 @@
 import os
 from collections import Counter
 
-def list_files(files):
+def list_file_counts(files):
     # Extract file extensions and count them
     extensions = [os.path.splitext(file)[1] for file in files]
     extension_counts = Counter(extensions)
@@ -19,7 +19,7 @@ whitelist = ['.jpeg','.png']
 files = os.listdir(directory)
 
 print('Before:')
-list_files(files)
+list_file_counts(files)
 
 for file in files:
     extension = os.path.splitext(file)[1]
@@ -34,4 +34,4 @@ for file in files:
 
 files = os.listdir(directory)
 print('\nAfter:')
-list_files(files)
+list_file_counts(files)
