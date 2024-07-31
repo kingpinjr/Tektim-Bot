@@ -76,13 +76,17 @@ def on_clicked(tag, label):
         sheet_path = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\spreadsheets\\pic_test.csv"
 
         # writes into csv
+        # this image flattening is occasionally creating 675 entries instead of 900
+
+        #TODO: Need to filter out pictures that won't have 901 entries in CSV. Too small?
         img = imread(current_image_path)
         img = resize(img, (15, 15))
         img = img.flatten()
         data_to_append = img.tolist()
         data_to_append.append(tag)
-        
+
         with open(sheet_path, mode='a', newline='') as file:
+            print(len(data_to_append))
             writer = csv.writer(file)
             writer.writerow(data_to_append)
 
@@ -91,7 +95,7 @@ def on_clicked(tag, label):
 
         # grab a new image
         set_image(label)
-        print('grabbing new image')
+        #print('grabbing new image')
     else:
         print('locked, ran out of images!')
 
