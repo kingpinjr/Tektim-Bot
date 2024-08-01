@@ -11,6 +11,7 @@ GUILD = os.getenv('DISCORD_SERVER')
 #print(TOKEN)
 intents=discord.Intents.default()
 intents.members = True
+intents.messages = True
 intents.message_content = True
 client = discord.Client(intents=intents)
 
@@ -51,11 +52,16 @@ async def on_message(message):
         raise discord.DiscordException
     
     # finally if some random message is seen log it here for now
-    else:
+    elif not message.attachments:
         print('\nAuthor: ', message.author)
         print('Message: ', message.content)
-        response = controller.generate_response()
+        response = controller.generate_response(message.content)
         await message.channel.send(response)
+
+    else:
+        emoji = controller.generate_react_on_media()
+        if emoji is not None:
+            await message.add_reaction(emoji)
 
 
 # error-handling. Gets sent to err.log
