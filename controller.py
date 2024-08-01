@@ -35,6 +35,10 @@ def generate_react_on_media():
             reaction = "<:catchest:1267111295145087057>"
         case 2:
             reaction = "<:erm:1267111273275854908>"
+        case 3:
+            rng2 = random.rangrange(1, 100)
+            if rng2 == 1:
+                reaction = "<:golden_catchest:1268418504990654546>"
 
     return reaction
 
