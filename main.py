@@ -59,7 +59,7 @@ async def on_message(message):
         await message.channel.send(response)
 
     else:
-        emoji = controller.generate_react_on_media()
+        emoji = controller.generate_react_on_media(message.attachments)
         if emoji is not None:
             await message.add_reaction(emoji)
 

@@ -26,7 +26,7 @@ def generate_response(msg):
         response = random.choice(msg_options)
     return response
 
-def generate_react_on_media():
+def generate_react_on_media(img):
     #If an image is sent, for now respond with an emote. 10 10 80 split
     rng = random.randrange(1, 10)
     reaction = ''

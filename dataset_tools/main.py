@@ -5,6 +5,7 @@ from PyQt5.QtGui import QPixmap
 
 from skimage.io import imread
 from skimage.transform import resize
+from skimage.color import rgb2gray
 
 import os
 import shutil
@@ -76,8 +77,9 @@ def on_clicked(tag, label):
         sheet_path = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\spreadsheets\\pic_test.csv"
 
         # writes into csv
-        img = imread(current_image_path)
-        img = resize(img, (15, 15))
+        img = imread(current_image_path)[:,:,:3] #use only first three channels
+        img = resize(img, (256, 256))
+        img = rgb2gray(img)
         img = img.flatten()
         data_to_append = img.tolist()
         data_to_append.append(tag)
