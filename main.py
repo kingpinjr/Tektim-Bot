@@ -51,16 +51,17 @@ async def on_message(message):
     elif (message.content.strip() == 'raise-exception' and message.author.strip() == 'tigm'):
         raise discord.DiscordException
     
-    # finally if some random message is seen log it here for now
+    # if some random message is seen respond to it here
     elif not message.attachments:
         print('\nAuthor: ', message.author)
         print('Message: ', message.content)
         response = controller.generate_response(message.content)
         await message.channel.send(response)
 
+    # if an attachment is seen, send the attachments to 
     else:
         emoji = controller.generate_react_on_media(message.attachments)
-        if emoji is not None:
+        if emoji != '':
             await message.add_reaction(emoji)
 
 

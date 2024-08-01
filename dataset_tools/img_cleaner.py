@@ -2,11 +2,14 @@ import os
 
 from skimage.io import imread
 from skimage.transform import resize
+from skimage.color import rgb2gray
 
-img = imread("C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\images\\processed\\12_1_1_image.png.9383beab-a697-4121-8349-0a6bcefba177.png")
-img1 = img.flatten()
-print(len(img1))
 
-img2 = resize(img, (15, 15))
-img2 = img2.flatten()
-print(len(img2))
+# format image to be 256x256 b/w
+def create_img_data(filepath):
+    formatted_image = ''
+    img = imread(filepath)[:,:,:3]
+    formatted_image = resize(img, (256, 256))
+    formatted_image = rgb2gray(formatted_image) # this requries only 3 channels.
+    formatted_image = formatted_image.flatten()
+    return formatted_image

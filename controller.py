@@ -10,9 +10,7 @@ import os
 
 #image prediction and processing imports
 from sklearn.svm import SVC
-from skimage.io import imread
-from skimage.transform import resize
-from skimage.color import rgb2gray
+from dataset_tools.img_cleaner import create_img_data
 
 def generate_response(msg):
     '''
@@ -42,32 +40,31 @@ def generate_react_on_media(attachment):
     # erm:             <:erm:1267111273275854908>
     # golden catchest: <:golden_catchest:1268418504990654546>
 
+    attachment = attachment[0]
     reaction = ''
 
-    # if there is more than one attachment, just look at the first one
-    if len(attachment) > 1:
-        attachment = attachment[0]
-
     # if the attachment is an image, we are going to predict on it
-    if attachment.content_type.startswith('image/'):
+    print(attachment.content_type)
+    if attachment.content_type.startswith("image/"):
 
         #download the image
         download_image(attachment.url, attachment.filename)
+
+        #create image data
         path = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\images\\live_input\\" + attachment.filename 
-        img = imread(path)[:,:,:3] #use only first three channels
-
-        #reformat the image
-        img = resize(img, (256, 256))
-        img = rgb2gray(img)
-        x_test = img.flatten()
-
+        x_test = create_img_data(path)
+        x_test = x_test.reshape(1, -1)
         #grab the model
         model = joblib.load('data/models/256img_model.joblib')
 
         #predict using the model
-        prediction = model.predict(x_test)
+        try:
+            prediction = model.predict(x_test)
+        except Exception as e:
+            print(f"Error caught: {e}")
 
         # assign reaction off prediction
+        print("Prediction: ",prediction)
         match prediction:
             case "funny":
                 rng2 = random.randrange(1, 100)

@@ -7,6 +7,8 @@ from skimage.io import imread
 from skimage.transform import resize
 from skimage.color import rgb2gray
 
+from img_cleaner import create_img_data
+
 import os
 import shutil
 import csv
@@ -77,10 +79,7 @@ def on_clicked(tag, label):
         sheet_path = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\spreadsheets\\pic_test.csv"
 
         # writes into csv
-        img = imread(current_image_path)[:,:,:3] #use only first three channels
-        img = resize(img, (256, 256))
-        img = rgb2gray(img)
-        img = img.flatten()
+        img = create_img_data(current_image_path)
         data_to_append = img.tolist()
         data_to_append.append(tag)
 
