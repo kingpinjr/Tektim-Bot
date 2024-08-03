@@ -68,18 +68,26 @@ def on_clicked(tag, label):
     global lock
     if not lock:
         # move image into new folder
-        process_dir = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\images\\processed"
+        tag_dir = "data/images/" + tag
         # Ensure the destination directory exists
-        if not os.path.exists(process_dir):
-            os.makedirs(process_dir)
+        if not os.path.exists(tag_dir):
+            os.makedirs(tag_dir)
 
         global current_image_path
+
+
+        '''
+        New process
+        1. GUI should move images to folder associated with tag
+        2. GUI should no longer write into csv
+        '''
         
 
         #write into csv at this location
-        sheet_path = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\spreadsheets\\pic_test.csv"
+        #sheet_path = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\spreadsheets\\pic_test.csv"
 
         # writes into csv
+        '''
         img = create_img_data(current_image_path)
         data_to_append = img.tolist()
         data_to_append.append(tag)
@@ -88,9 +96,9 @@ def on_clicked(tag, label):
             #print(len(data_to_append))
             writer = csv.writer(file)
             writer.writerow(data_to_append)
-
+        '''
         # move the file
-        shutil.move(current_image_path, process_dir)
+        shutil.move(current_image_path, tag_dir)
 
         # grab a new image
         set_image(label)
@@ -116,11 +124,11 @@ def set_center(window):
     window.move(window_rect.topLeft())
 
 def retrieve_image():
-    directory = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\images\\break-room_media"
+    directory = "data/images/preprocessed"
     files = os.listdir(directory)
     #print(len(files))
     if len(files) == 0:
-        file = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\dataset_tools\\out_of_images.png"
+        file = "out_of_images.png"
         global lock
         lock = True
 

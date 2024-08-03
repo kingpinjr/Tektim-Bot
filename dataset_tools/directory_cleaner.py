@@ -26,8 +26,7 @@ parent_directory = 'data\\images'
 
 ext_whitelist = ['.jpeg','.png','.jpg']
 
-dir_blacklist = ('data\\images\\processed',
-                 'data\\images\\preprocessed',
+dir_blacklist = ('data\\images\\preprocessed',
                  'data\\images\\live_input',
                  'data\\images\\cringe',
                  'data\\images\\neutral',
