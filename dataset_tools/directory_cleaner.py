@@ -28,9 +28,10 @@ ext_whitelist = ['.jpeg','.png','.jpg']
 
 dir_blacklist = ('data\\images\\preprocessed',
                  'data\\images\\live_input',
-                 'data\\images\\cringe',
-                 'data\\images\\neutral',
-                 'data\\images\\funny')
+                 'data\\images\\training_data\\cringe',
+                 'data\\images\\training_data\\funny',
+                 'data\\images\\training_data\\neutral',
+                 'data\\images\\training_data')
 
 # List all files in the directory
 #files = os.listdir(directory)

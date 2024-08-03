@@ -68,7 +68,7 @@ def on_clicked(tag, label):
     global lock
     if not lock:
         # move image into new folder
-        tag_dir = "data/images/" + tag
+        tag_dir = "data/images/training_data/" + tag
         # Ensure the destination directory exists
         if not os.path.exists(tag_dir):
             os.makedirs(tag_dir)
