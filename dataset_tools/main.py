@@ -5,6 +5,9 @@ from PyQt5.QtGui import QPixmap
 
 from skimage.io import imread
 from skimage.transform import resize
+from skimage.color import rgb2gray
+
+from img_cleaner import create_img_data
 
 import os
 import shutil
@@ -18,6 +21,7 @@ def main():
     window.setGeometry(0, 0, 1200, 800)
     set_center(window)
     window.setWindowTitle("Image Tagging Tool")
+    window.setStyleSheet("background-color: #2a2b30")
 
     main_layout = QVBoxLayout()
 
@@ -76,9 +80,7 @@ def on_clicked(tag, label):
         sheet_path = "C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\spreadsheets\\pic_test.csv"
 
         # writes into csv
-        img = imread(current_image_path)
-        img = resize(img, (15, 15))
-        img = img.flatten()
+        img = create_img_data(current_image_path)
         data_to_append = img.tolist()
         data_to_append.append(tag)
 

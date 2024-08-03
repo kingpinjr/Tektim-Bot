@@ -15,13 +15,14 @@ def list_file_counts(files):
 # Define the directory you want to scan
 directory = 'C:\\Users\\timka\\Documents\\code\\python\\Tektim-Bot\\data\\images\\break-room_media'
 
-whitelist = ['.jpeg','.png']
+whitelist = ['.jpeg','.png','.jpg']
 
 # List all files in the directory
 files = os.listdir(directory)
 
 print('Before:')
 list_file_counts(files)
+'''
 
 for file in files:
     extension = os.path.splitext(file)[1]
@@ -51,3 +52,4 @@ for file in files:
 files = os.listdir(directory)
 print('\nAfter:')
 list_file_counts(files)
+'''
