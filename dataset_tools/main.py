@@ -21,6 +21,7 @@ def main():
     window.setGeometry(0, 0, 1200, 800)
     set_center(window)
     window.setWindowTitle("Image Tagging Tool")
+    window.setStyleSheet("background-color: #2a2b30")
 
     main_layout = QVBoxLayout()
 
